@@ -1,0 +1,14 @@
+h2{
+    color:rgb(30, 65, 66); 
+  
+}
+.default-btn{
+    background-color:#adbcbc;
+    border-radius: 25px;
+   
+}
+.default-btn:hover{
+    background-color:rgb(30, 65, 66);
+    color: white;
+    box-shadow:0 6px 4px -2px gray;
+}
