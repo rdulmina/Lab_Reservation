@@ -12,21 +12,21 @@ router.use(session({secret: "Shh, its a secret!"}));
 
 router.post('/register',function(req,res){
  var newUser=new User({
-    username:req.body.username,
+    username:req.body.username.toLowerCase(),
     password:req.body.password,
-    firstname:req.body.firstname,
-    lastname:req.body.lastname,
-    email:req.body.email
+    firstname:req.body.firstname.toLowerCase(),
+    lastname:req.body.lastname.toLowerCase(),
+    email:req.body.email.toLowerCase()
  })
 
  User.addUser(newUser,function(err,user){
     if(err) throw err;
-    res.end("user inserted");
+    
  });
-
+ res.end()
 });
 router.post('/login',function(req,res){
-    username=req.body.username
+    username=req.body.username.toLowerCase();
     password=req.body.password
 
     User.findByUsername(username,function(err,user){

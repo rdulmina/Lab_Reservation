@@ -1,4 +1,13 @@
 <h2>Current Reservaions</h2>
+<div>
+  <label >Week:</label>
+      <div class="input-append date" id="dp3" data-date="12-02-2012">
+          <span class="add-on" data-weekpicker="weekpicker"
+          data-target="#week_range"><button>Pick A Week</button></span>
+          <input type="text" readonly="" id="week_range" placeholder="Pick A Week To See Reservaions" (click)="getReservations()"/>
+      </div>
+</div>
+
 <table class="table-bordered" id="reservationtable">
     <thead>
       <tr>
@@ -41,41 +50,41 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="table-default">
-        <th scope="row">Lab A</th>
+      <tr class="table-default" *ngFor="let lab of allLabs">
+        <th scope="row">{{lab.labName}}</th>
         <td>
           <table class="time-slot">
-            <td class="reserved"></td><td></td><td></td><td></td>
+            <td id="{{lab.labName}}su810"></td><td id="{{lab.labName}}su1012"></td><td id="{{lab.labName}}su13"></td><td id="{{lab.labName}}su35"></td>
           </table>
         </td>
         <td>
           <table class="time-slot">
-            <td class="reserved"></td><td></td><td></td><td></td>
+            <td id="{{lab.labName}}mo810"></td><td id="{{lab.labName}}mo1012"></td><td id="{{lab.labName}}mo13"></td><td id="{{lab.labName}}mo35"></td>
           </table>
         </td>
         <td>
           <table class="time-slot">
-            <td class="reserved"></td><td></td><td></td><td></td>
+            <td id="{{lab.labName}}tu810"></td><td id="{{lab.labName}}tu1012"></td><td id="{{lab.labName}}tu13"></td><td id="{{lab.labName}}tu35"></td>
           </table>
         </td>
         <td>
           <table class="time-slot">
-            <td class="reserved"></td><td></td><td></td><td></td>
+            <td id="{{lab.labName}}we810"></td><td id="{{lab.labName}}we1012"></td><td id="{{lab.labName}}we13"></td><td id="{{lab.labName}}we35"></td>
           </table>
         </td>
         <td>
           <table class="time-slot">
-            <td class="reserved"></td><td></td><td></td><td></td>
+            <td id="{{lab.labName}}th810"></td><td id="{{lab.labName}}th1012"></td><td id="{{lab.labName}}th13"></td><td id="{{lab.labName}}th35"></td>
           </table>
         </td>
         <td>
           <table class="time-slot">
-            <td class="reserved"></td><td></td><td></td><td></td>
+            <td id="{{lab.labName}}fr810"></td><td id="{{lab.labName}}fr1012"></td><td id="{{lab.labName}}fr13"></td><td id="{{lab.labName}}fr35"></td>
           </table>
         </td>
         <td>
           <table class="time-slot">
-            <td class="reserved"></td><td></td><td></td><td></td>
+            <td id="{{lab.labName}}sa810"></td><td id="{{lab.labName}}sa1012"></td><td id="{{lab.labName}}sa13"></td><td id="{{lab.labName}}sa35"></td>
           </table>
         </td>
       </tr>

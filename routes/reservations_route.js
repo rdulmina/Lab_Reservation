@@ -5,18 +5,44 @@ var Reservation=require('../models/reservation_model');
 var router=express.Router();
 router.use(bodyparser());
 
-router.post('/newreservation ',function(req,res){
+router.post('/newreservation',function(req,res){
     var newReservation=new Reservation({
-        _id:0,
-        labNo:req.body.labNo,
+        labName:req.body.labName.toLowerCase(),
         date:req.body.date,
         time:req.body.time,
-        username:req.body.username
+        username:req.body.username.toLowerCase()
     });
 
     Reservation.addReservation(newReservation,function(err,Reservation){
         if (err) throw err;
-        console.log("New reservation added")
+        console.log(Reservation);
+        res.json({msg:"New reservation added"});
+        
     })
 });
+
+//find available time slots for puticular lab name and date
+router.post('/findtimeslots',function(req,res){
+    
+    Reservation.findTimeSlots(req.body.labName,req.body.date,function(err,timeSlots){
+        console.log(timeSlots);
+        res.json({timeSlots:timeSlots});
+    })
+})
+//get all current reservations
+router.post('/currentreservations',function(req,res){
+    
+    Reservation.getAllReservations(function(err,reservations){
+        console.log(reservations)
+        res.json({reservations:reservations});
+    })
+})
+//get reservation for the given week
+router.post('/getreservationsforweek',function(req,res){
+    
+    Reservation.getReservationsForWeek(req.body.week,function(err,reservations){
+        console.log(reservations)
+        res.json({reservations:reservations});
+    })
+})
 module.exports=router;

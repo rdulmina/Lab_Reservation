@@ -19,3 +19,8 @@
 .reserved{
     background-color: #B58900;
 }
+#week_range{
+    width: 20%;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}

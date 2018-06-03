@@ -12,7 +12,7 @@ app.use(cors());
 //database connection
 var connection=mongoose.connect(dbcon.database);
 if(connection){
-    console.log('done');
+    console.log('Database connected');
 }
 else{
     console.log('db error');

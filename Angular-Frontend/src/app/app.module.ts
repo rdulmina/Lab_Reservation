@@ -7,6 +7,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { NewreservationComponent } from './newreservation/newreservation.component';
 import { AuthService } from './service/auth.service';
+import { NewreservationService } from './service/newreservation.service';
+import { LabService } from './service/lab.service';
 import { HttpModule } from '@angular/http';
 
 const applicationrouts:Routes=[
@@ -29,7 +31,11 @@ const applicationrouts:Routes=[
     HttpModule,     
     RouterModule.forRoot(applicationrouts)
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    NewreservationService,
+    LabService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
