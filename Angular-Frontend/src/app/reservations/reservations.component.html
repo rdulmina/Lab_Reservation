@@ -1,48 +1,47 @@
 <h2>Current Reservaions</h2>
-<div>
-  <label >Week:</label>
-      <div class="input-append date" id="dp3" data-date="12-02-2012">
+<form class="form-inline">
+      <div class="input-append date form-group" id="dp3" data-date="12-02-2012">
           <span class="add-on" data-weekpicker="weekpicker"
-          data-target="#week_range"><button>Pick A Week</button></span>
-          <input type="text" readonly="" id="week_range" placeholder="Pick A Week To See Reservaions" (click)="getReservations()"/>
+          data-target="#week_range"><button class="default-btn btn">Pick A Week</button></span>
+          <input type="text" class="form-control" readonly="" id="week_range" placeholder="Pick A Week To See Reservaions" (click)="showReservations($event)"/>
       </div>
-</div>
-
+    </form>
+<br>
 <table class="table-bordered" id="reservationtable">
     <thead>
       <tr>
         <th scope="col">Lab Name</th>
-        <th scope="col">Sunday
+        <th scope="col">Sunday<label>({{date.su}})</label>
           <table>
             <td>8-10</td><td>10-12</td><td>1-3</td><td>3-5</td>
           </table>
         </th>
-        <th scope="col">Monday
+        <th scope="col">Monday<label>({{date.mo}})</label>
           <table>
             <td>8-10</td><td>10-12</td><td>1-3</td><td>3-5</td>
           </table>
         </th>
-        <th scope="col">Tuesday
+        <th scope="col">Tuesday<label>({{date.tu}})</label>
           <table>
             <td>8-10</td><td>10-12</td><td>1-3</td><td>3-5</td>
           </table>
         </th>
-        <th scope="col">Wednesday
+        <th scope="col">Wednesday<label>({{date.we}})</label>
           <table>
             <td>8-10</td><td>10-12</td><td>1-3</td><td>3-5</td>
           </table>
         </th>
-        <th scope="col">Thursday
+        <th scope="col">Thursday<label>({{date.th}})</label>
           <table>
             <td>8-10</td><td>10-12</td><td>1-3</td><td>3-5</td>
           </table>
         </th>
-        <th scope="col">Friday
+        <th scope="col">Friday<label>({{date.fr}})</label>
           <table>
             <td>8-10</td><td>10-12</td><td>1-3</td><td>3-5</td>
           </table>
         </th>
-        <th scope="col">Saturday
+        <th scope="col">Saturday<label>({{date.sa}})</label>
           <table>
             <td>8-10</td><td>10-12</td><td>1-3</td><td>3-5</td>
           </table>
@@ -52,39 +51,9 @@
     <tbody>
       <tr class="table-default" *ngFor="let lab of allLabs">
         <th scope="row">{{lab.labName}}</th>
-        <td>
+        <td *ngFor="let k of objectKeys(date)">
           <table class="time-slot">
-            <td id="{{lab.labName}}su810"></td><td id="{{lab.labName}}su1012"></td><td id="{{lab.labName}}su13"></td><td id="{{lab.labName}}su35"></td>
-          </table>
-        </td>
-        <td>
-          <table class="time-slot">
-            <td id="{{lab.labName}}mo810"></td><td id="{{lab.labName}}mo1012"></td><td id="{{lab.labName}}mo13"></td><td id="{{lab.labName}}mo35"></td>
-          </table>
-        </td>
-        <td>
-          <table class="time-slot">
-            <td id="{{lab.labName}}tu810"></td><td id="{{lab.labName}}tu1012"></td><td id="{{lab.labName}}tu13"></td><td id="{{lab.labName}}tu35"></td>
-          </table>
-        </td>
-        <td>
-          <table class="time-slot">
-            <td id="{{lab.labName}}we810"></td><td id="{{lab.labName}}we1012"></td><td id="{{lab.labName}}we13"></td><td id="{{lab.labName}}we35"></td>
-          </table>
-        </td>
-        <td>
-          <table class="time-slot">
-            <td id="{{lab.labName}}th810"></td><td id="{{lab.labName}}th1012"></td><td id="{{lab.labName}}th13"></td><td id="{{lab.labName}}th35"></td>
-          </table>
-        </td>
-        <td>
-          <table class="time-slot">
-            <td id="{{lab.labName}}fr810"></td><td id="{{lab.labName}}fr1012"></td><td id="{{lab.labName}}fr13"></td><td id="{{lab.labName}}fr35"></td>
-          </table>
-        </td>
-        <td>
-          <table class="time-slot">
-            <td id="{{lab.labName}}sa810"></td><td id="{{lab.labName}}sa1012"></td><td id="{{lab.labName}}sa13"></td><td id="{{lab.labName}}sa35"></td>
+            <td *ngFor="let timeSolt of timeSlots" [ngClass]="{'reserved':isReserved(lab.labName,date[k],timeSolt)}"></td>
           </table>
         </td>
       </tr>

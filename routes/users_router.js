@@ -32,7 +32,7 @@ router.post('/login',function(req,res){
     User.findByUsername(username,function(err,user){
         if(err) throw err;
         if(!user){
-            res.end("Invalid Username")
+            res.json({userdata:"Invalid User"})
         }
         else{
         var hash=user.password;
@@ -45,7 +45,7 @@ router.post('/login',function(req,res){
            res.json({userdata: req.session});
         }
         else{
-            res.json({msg:'Incorrect Password'});
+            res.json({userdata:'Incorrect Password'});
         }
     }
         

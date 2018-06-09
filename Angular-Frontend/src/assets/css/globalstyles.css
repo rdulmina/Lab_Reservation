@@ -12,3 +12,6 @@ h2{
     color: white;
     box-shadow:0 6px 4px -2px gray;
 }
+table{
+    border-radius: 10px;
+}

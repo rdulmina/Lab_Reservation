@@ -24,9 +24,9 @@ export class NewreservationService {
     headers.append('Content-type','application/json');
     return this.http.post('http://localhost:3000/reservation/currentreservations',"",{headers:headers}).map(res=>res.json());
   }
-  getReservationsForWeek(week){
-    let headers=new Headers();
-    headers.append('Content-type','application/json');
-    return this.http.post('http://localhost:3000/reservation/getreservationsforweek',week,{headers:headers}).map(res=>res.json());
-  }
+  // getReservationsForWeek(week){
+  //   let headers=new Headers();
+  //   headers.append('Content-type','application/json');
+  //   return this.http.post('http://localhost:3000/reservation/getreservationsforweek',week,{headers:headers}).map(res=>res.json());
+  // }
 }

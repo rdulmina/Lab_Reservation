@@ -31,12 +31,18 @@ export class NavbarComponent implements OnInit {
       username:this.username,
       password:this.password
     }
+    console.log(user)
     this.authservice.authenticate(user).subscribe(res=>{
+      if(res.userdata=="Invalid User" || res.userdata=="Incorrect Password"){
+        console.log(res.userdata);
+      }
+      else{
       this.currentuname=res.userdata.username;
       this.loggedin=true;
       this.loggedout=false;
       localStorage.setItem('Loggedin','true');
       localStorage.setItem('UserData',JSON.stringify(res.userdata));
+      }
     })
   }
   logout(){
