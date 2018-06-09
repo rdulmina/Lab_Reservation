@@ -37,7 +37,11 @@ module.exports.findTimeSlots=function(labName,date,callback){
 module.exports.getAllReservations=function(callback){
     this.find({},callback);
 }
-module.exports.getReservationsForWeek=function(week,callback){
-    console.log(week)
-   // this.find({},callback);
+module.exports.myreservations=function(username,callback){
+    this.find({username:username},callback);
+  
+}
+module.exports.deleteReservation=function(_id,callback){
+    this.remove({_id:_id},callback);
+    
 }

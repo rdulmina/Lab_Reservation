@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router}  from '@angular/router';
 import { AuthService } from '../service/auth.service';
-
+import * as $ from "jquery"
+import { Button } from 'protractor';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

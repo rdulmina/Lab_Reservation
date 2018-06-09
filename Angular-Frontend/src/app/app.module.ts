@@ -9,11 +9,14 @@ import { NewreservationComponent } from './newreservation/newreservation.compone
 import { AuthService } from './service/auth.service';
 import { NewreservationService } from './service/newreservation.service';
 import { LabService } from './service/lab.service';
+import { UserService } from './service/user.service';
 import { HttpModule } from '@angular/http';
+import { MyreservationsComponent } from './myreservations/myreservations.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 const applicationrouts:Routes=[
   {path:'newreservation',component:NewreservationComponent},
-  {path:'myreservations',component:NewreservationComponent},
+  {path:'myreservations',component:MyreservationsComponent},
   {path:'settings',component:NewreservationComponent},
   {path:'',component:ReservationsComponent}
 ]
@@ -23,18 +26,21 @@ const applicationrouts:Routes=[
     AppComponent,
     NavbarComponent,
     ReservationsComponent,
-    NewreservationComponent
+    NewreservationComponent,
+    MyreservationsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,     
-    RouterModule.forRoot(applicationrouts)
+    RouterModule.forRoot(applicationrouts),
+    AngularFontAwesomeModule
   ],
   providers: [
     AuthService,
     NewreservationService,
-    LabService
+    LabService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

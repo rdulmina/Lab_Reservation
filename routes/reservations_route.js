@@ -37,12 +37,27 @@ router.post('/currentreservations',function(req,res){
         res.json({reservations:reservations});
     })
 })
-//get reservation for the given week
-router.post('/getreservationsforweek',function(req,res){
+// //get reservation for the given week
+// router.post('/getreservationsforweek',function(req,res){
     
-    Reservation.getReservationsForWeek(req.body.week,function(err,reservations){
+//     Reservation.getReservationsForWeek(req.body.week,function(err,reservations){
+//         console.log(reservations)
+//         res.json({reservations:reservations});
+//     })
+// })
+//get reservations for given user
+router.post('/myreservations',function(req,res){
+    
+    Reservation.getReservationsOfUser(req.body.username,function(err,reservations){
         console.log(reservations)
         res.json({reservations:reservations});
+    })
+})
+router.post('/deletereservation',function(req,res){
+    
+    Reservation.deleteReservation(req.body._id,function(err,reservations){
+        if (err) throw err;
+        res.json({msg:"reservation deleted"});
     })
 })
 module.exports=router;

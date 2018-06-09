@@ -10,7 +10,7 @@
         </button>
         <a class="navbar-brand" [routerLink]="['']">UCSC Lab Reservation</a>
       </div>
-  
+    
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="navbar-collapse-4">
         <form (submit)="login()">
@@ -24,7 +24,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{currentuname}}<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a [routerLink]="['/newreservation']">New reservation</a></li>
-                  <li><a href="#">My reservations</a></li>
+                  <li><a [routerLink]="['/myreservations']">My reservations</a></li>
                   <li><a [routerLink]="['']">Current reservations</a></li>
                   <li><a href="#">Settings</a></li>
                   <li class="divider"></li>

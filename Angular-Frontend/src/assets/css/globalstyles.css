@@ -15,3 +15,13 @@ h2{
 table{
     border-radius: 10px;
 }
+.button-danger{
+    color: rgb(61, 61, 61);
+    border-radius: 25px;
+    background-color:rgb(216, 138, 142);
+}
+.button-danger:hover{
+    color: white;
+    background-color:rgb(143, 38, 43);
+    box-shadow:0 6px 4px -2px gray;
+}

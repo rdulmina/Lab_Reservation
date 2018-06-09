@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { LabService } from '../service/lab.service';
 import { NewreservationService } from '../service/newreservation.service';
-
+import * as $ from "jquery"
 @Component({
   selector: 'app-reservations',
   templateUrl: './reservations.component.html',
@@ -25,6 +25,7 @@ export class ReservationsComponent implements OnInit {
     this.lab_service.getAllLabs().subscribe(res=>{
     this.allLabs=res.labs;});
     this.getReservations();
+    
   }
   
   getReservations(){
