@@ -25,3 +25,15 @@ table{
     background-color:rgb(143, 38, 43);
     box-shadow:0 6px 4px -2px gray;
 }
+.editing{
+    background-color: #e7b100;
+    color: white;
+    border-radius: 25px;
+    
+}
+.editing:hover{
+    background-color: #cc8b00;
+    color: white;
+    border-radius: 25px;
+    box-shadow:0 6px 4px -2px gray;
+}

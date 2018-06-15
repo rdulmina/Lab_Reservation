@@ -379,9 +379,9 @@ export class MyreservationsComponent implements OnInit {
           var reservation={
             _id:event.target.name
           }
-          // this.reservationService.deleteReservation(reservation).subscribe(res=>{
-          //   console.log(res.msg)
-          // });
+          this.reservationService.deleteReservation(reservation).subscribe(res=>{
+            console.log(res.msg)
+          });
           event.target.parentElement.parentElement.remove()
           $.notify({
             // options

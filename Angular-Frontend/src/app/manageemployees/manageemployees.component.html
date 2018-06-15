@@ -1,5 +1,5 @@
 <h2>My Reservations</h2>
-<div class="container-fluid">
+<div class="container">
 <table class="table table-hover">
   <thead>
     <tr>
@@ -10,8 +10,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{user.username}}</td><td>{{user.firstname}}</td><td>{{user.lastname}}</td><td>{{user.email}}</td>
+    <tr><td><input class="form-control" name="uname" [(ngModel)]="uname"></td><td><input class="form-control" name="fname" [(ngModel)]="fname"></td><td><input class="form-control" name="lname" [(ngModel)]="lname"></td><td><input class="form-control" name="email" [(ngModel)]="email" email></td><td><button class="btn default-btn" (click)="register()">Register</button></td></tr>
+    <tr *ngFor="let user of users" #employees>
+      <td><input value="{{user.username}}" class="form-control" disabled></td><td><input value="{{user.firstname}}" class="form-control" disabled></td><td><input value="{{user.lastname}}" class="form-control" disabled></td><td><input value="{{user.email}}" class="form-control" disabled></td><td><button class="btn default-btn" style="margin-left: 2px;" (click)="editUser($event)">&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn button-danger" name="{{user._id}}" (click)="deleteUser($event)">Delete</button></td>
     </tr>
   </tbody>
 </table>

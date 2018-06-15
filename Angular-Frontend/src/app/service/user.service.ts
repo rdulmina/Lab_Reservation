@@ -18,4 +18,19 @@ export class UserService {
     headers.append('Content-type','application/json');
     return this.http.post('http://localhost:3000/user/allusers','',{headers:headers}).map(res=>res.json());
   }
+  registerUser(user){
+    let headers=new Headers();
+    headers.append('Content-type','application/json');
+    return this.http.post('http://localhost:3000/user/register',user,{headers:headers}).map(res=>res.json());
+  }
+  deleteUser(user){
+    let headers=new Headers();
+    headers.append('Content-type','application/json');
+    return this.http.post('http://localhost:3000/user/delete',user,{headers:headers}).map(res=>res.json());
+  }
+  updateUser(newUserDetail){
+    let headers=new Headers();
+    headers.append('Content-type','application/json');
+    return this.http.post('http://localhost:3000/user/update',newUserDetail,{headers:headers}).map(res=>res.json());
+  }
 }

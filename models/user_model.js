@@ -20,12 +20,12 @@ module.exports.addUser=function(newuser,callback){
   var salt = bcrypt.genSaltSync(10);
   var hash = bcrypt.hashSync(newuser.password, salt);
   newuser.password=hash;
-  console.log("user added")
-  newuser.save(callback);
+  newuser.save(callback(err,"User Registered"));
+ 
   }
   else{
-    console.log("Username already exsists")
-    callback(); 
+    
+    callback(err,"Username already exsists"); 
   }
   });
 
@@ -36,4 +36,12 @@ module.exports.findByUsername=function(username,callback){
 }
 module.exports.allUsers=function(callback){
   this.find({ username: { $ne:'admin'} },callback);
+}
+module.exports.deleteUser=function(_id,callback){
+  const query={_id:_id}
+  this.remove(query,callback);
+}
+module.exports.updateUser=function(newUserDetail,callback){
+  const query={username:newUserDetail.username}
+  this.update(query,newUserDetail,callback);
 }

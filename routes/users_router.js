@@ -24,11 +24,11 @@ if(req.body.username=="admin"){
     type:type
  })
 
- User.addUser(newUser,function(err,user){
+ User.addUser(newUser,function(err,message){
     if(err) throw err;
+    res.json({msg:message});
     
  });
- res.end()
 });
 router.post('/login',function(req,res){
     username=req.body.username.toLowerCase();
@@ -64,5 +64,19 @@ router.post('/allusers',function(req,res){
     })
     
 });
-   
+router.post('/delete',function(req,res){
+    User.deleteUser(req.body._id,function(err,user){
+        if (err) throw err;
+        console.log(user);
+       // res.json({msg:users})
+    })
+    
+});  
+router.post('/update',function(req,res){
+    User.updateUser(req.body,function(err,msg){
+         if (err) throw err;
+         res.json({msg:msg})
+    })
+    
+}); 
 module.exports=router;
