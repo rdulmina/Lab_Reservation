@@ -37,7 +37,7 @@ module.exports.findTimeSlots=function(labName,date,callback){
 module.exports.getAllReservations=function(callback){
     this.find({},callback);
 }
-module.exports.myreservations=function(username,callback){
+module.exports.myReservations=function(username,callback){
     this.find({username:username},callback);
   
 }

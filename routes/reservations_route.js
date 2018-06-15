@@ -48,7 +48,7 @@ router.post('/currentreservations',function(req,res){
 //get reservations for given user
 router.post('/myreservations',function(req,res){
     
-    Reservation.getReservationsOfUser(req.body.username,function(err,reservations){
+    Reservation.myReservations(req.body.username,function(err,reservations){
         console.log(reservations)
         res.json({reservations:reservations});
     })

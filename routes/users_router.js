@@ -11,12 +11,17 @@ router.use(bodyparser());
 router.use(session({secret: "Shh, its a secret!"}));
 
 router.post('/register',function(req,res){
+var type="user"
+if(req.body.username=="admin"){
+    type="admin";
+}   
  var newUser=new User({
     username:req.body.username.toLowerCase(),
     password:req.body.password,
     firstname:req.body.firstname.toLowerCase(),
     lastname:req.body.lastname.toLowerCase(),
-    email:req.body.email.toLowerCase()
+    email:req.body.email.toLowerCase(),
+    type:type
  })
 
  User.addUser(newUser,function(err,user){
@@ -42,6 +47,7 @@ router.post('/login',function(req,res){
            req.session.firstname=user.firstname;
            req.session.lastname=user.lastname;
            req.session.email=user.email;
+           req.session.type=user.type;
            res.json({userdata: req.session});
         }
         else{
@@ -51,4 +57,12 @@ router.post('/login',function(req,res){
         
     });
    });
+router.post('/allusers',function(req,res){
+    User.allUsers(function(err,users){
+        if (err) throw err;
+        res.json({users:users})
+    })
+    
+});
+   
 module.exports=router;

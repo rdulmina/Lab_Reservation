@@ -6,6 +6,7 @@ var app=express();
 var user=require('./routes/users_router');
 var reservation=require('./routes/reservations_route');
 var lab=require('./routes/labs_rout');
+var admin=require('./routes/admin_rout');
 
 var cors=require('cors');
 app.use(cors());
@@ -25,7 +26,7 @@ app.use(express.static(path.join(__dirname,"public")));
 app.use('/user',user);
 app.use('/reservation',reservation);
 app.use('/lab',lab);
-
+//app.use('/admin',admin);
 
 app.listen(3000,function(){
     console.log('Node server is up');

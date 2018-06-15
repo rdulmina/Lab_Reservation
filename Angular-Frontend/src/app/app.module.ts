@@ -13,11 +13,17 @@ import { UserService } from './service/user.service';
 import { HttpModule } from '@angular/http';
 import { MyreservationsComponent } from './myreservations/myreservations.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { ManageemployeesComponent } from './manageemployees/manageemployees.component';
+import { ManagelabsComponent } from './managelabs/managelabs.component';
+import { ReportsComponent } from './reports/reports.component';
 
 const applicationrouts:Routes=[
   {path:'newreservation',component:NewreservationComponent},
   {path:'myreservations',component:MyreservationsComponent},
   {path:'settings',component:NewreservationComponent},
+  {path:'manageemployees',component:ManageemployeesComponent},
+  {path:'managelabs',component:ManagelabsComponent},
+  {path:'reports',component:ReportsComponent},
   {path:'',component:ReservationsComponent}
 ]
 
@@ -27,7 +33,10 @@ const applicationrouts:Routes=[
     NavbarComponent,
     ReservationsComponent,
     NewreservationComponent,
-    MyreservationsComponent
+    MyreservationsComponent,
+    ManageemployeesComponent,
+    ManagelabsComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,

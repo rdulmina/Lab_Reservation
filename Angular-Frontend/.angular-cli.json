@@ -20,14 +20,16 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "../node_modules/font-awesome/css/font-awesome.css"
+        "../node_modules/font-awesome/css/font-awesome.css",
+        "../src/assets/css/animate.css"
       ],
       "scripts": ["../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/popper.js/dist/umd/popper.min.js",
     "../node_modules/bootstrap/dist/js/bootstrap.min.js",
     "../src/assets/js/bootstrap-datepicker.min.js",
     "../src/assets/js/week-picker.js",
-    "../src/assets/js/datepicker-init.js"
+    "../src/assets/js/datepicker-init.js",
+    "../src/assets/js/bootstrap-notify.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

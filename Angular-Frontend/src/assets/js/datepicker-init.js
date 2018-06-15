@@ -4,8 +4,8 @@ $(document).ready(function() {
             format: 'yyyy-mm-dd'
         })
         .on('changeDate', function(e) {
-            // Revalidate the date field
-            // $('#eventForm').formValidation('revalidateField', 'date');
+         
+            
         });
         $('#datePicker2')
         .datepicker({

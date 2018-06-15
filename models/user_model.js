@@ -8,7 +8,8 @@ var userSchema = new Schema({
   password:String,
   firstname:String,
   lastname:String,
-  email:String
+  email:String,
+  type:String
 });
 
 module.exports=mongoose.model('user',userSchema);
@@ -32,4 +33,7 @@ module.exports.addUser=function(newuser,callback){
 module.exports.findByUsername=function(username,callback){
   const query={username:username}
   this.findOne(query,callback);
+}
+module.exports.allUsers=function(callback){
+  this.find({ username: { $ne:'admin'} },callback);
 }
