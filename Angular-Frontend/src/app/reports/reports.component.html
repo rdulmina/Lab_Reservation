@@ -1,3 +1,57 @@
-<p>
-  reports works!
-</p>
+<h2>Reports</h2>
+<div class="container">
+    <ul class="nav nav-tabs">
+      <li><a data-toggle="tab" href="#home">Monthly Lab Reservations</a></li>
+      <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    </ul>
+    <div class="tab-content" style="margin-top:20px;">
+      <div id="home" class="tab-pane fade in active">
+        <div class="col-md-2">
+          <button class="default-btn btn" (click)="monthlyLabReservations()" style="margin-left: 15px;">&nbsp;&nbsp;&nbsp;Print Report&nbsp;&nbsp;&nbsp;</button>
+          <div class="container col-md-12">     
+            <div class="row">
+                  <div class="">
+                      <div class="monthPicker">
+                              <div class="monthPicker-body">
+                              <a  class="monthPicker-body-month" value="1" (click)="showReservations($event)"><span id="1">Jan.</span></a>
+                              <a  class="monthPicker-body-month" value="2" (click)="showReservations($event)"><span id="2">Feb.</span></a>
+                              <a  class="monthPicker-body-month" value="3" (click)="showReservations($event)"><span id="3">Mar.</span></a>
+                              <a  class="monthPicker-body-month" value="4" (click)="showReservations($event)"><span id="4">Apr.</span></a>
+                              <a  class="monthPicker-body-month" value="5" (click)="showReservations($event)"><span id="5">May</span></a>
+                              <a  class="monthPicker-body-month" value="6" (click)="showReservations($event)"><span id="6">June</span></a>
+                              <a  class="monthPicker-body-month" value="7" (click)="showReservations($event)"><span id="7">July</span></a>
+                              <a  class="monthPicker-body-month" value="8" (click)="showReservations($event)"><span id="8">Aug.</span></a>
+                              <a  class="monthPicker-body-month" value="9" (click)="showReservations($event)"><span id="9">Sep.</span></a>
+                              <a  class="monthPicker-body-month" value="10" (click)="showReservations($event)"><span id="10">Oct.</span></a>
+                              <a  class="monthPicker-body-month" value="11" (click)="showReservations($event)"><span id="11">Nov.</span></a>
+                              <a  class="monthPicker-body-month" value="12" (click)="showReservations($event)"><span id="12">Dec.</span></a>
+                          </div>
+                      </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+         <table class="table table-hover">
+           <thead>
+             <tr>
+               <th>Lab Name</th>
+               <th>Number Of Reservations</th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr *ngFor="let lab of reservationFreqJson">
+               <td>{{lab.labName}}</td>
+               <td>{{lab.count}}</td>
+             </tr>
+           </tbody>
+         </table>
+        </div>
+      </div>
+      <div id="menu1" class="tab-pane fade in">
+          <h3>HssOME</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </div>
+      
+    </div>
+  </div>

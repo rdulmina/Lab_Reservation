@@ -383,7 +383,7 @@ export class NavbarComponent implements OnInit {
     console.log(user)
     this.authservice.authenticate(user).subscribe(res=>{
       if(res.userdata=="Invalid User" || res.userdata=="Incorrect Password"){
-        console.log(res.userdata);
+        //console.log(res.userdata);
         $.notify({
           // options
           icon: 'glyphicon glyphicon-remove-circle',

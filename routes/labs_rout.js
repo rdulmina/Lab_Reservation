@@ -20,8 +20,8 @@ router.post('/getalllabs',function(req,res){
    
     Lab.getAllLabs(function(err,labs){
         if(err) throw err;
-       
         res.json({labs:labs});
+       
     });
 });
 module.exports=router;

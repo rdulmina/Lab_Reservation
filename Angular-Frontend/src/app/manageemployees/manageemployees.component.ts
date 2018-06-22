@@ -455,11 +455,11 @@ export class ManageemployeesComponent implements OnInit {
     var message=""
     var DataItems=event.target.parentElement.parentElement.children
 
-    if(DataItems.item(i).querySelector('input').disabled){
+    if(DataItems.item(1).querySelector('input').disabled){
       event.target.classList.remove('default-btn')
       event.target.classList.add('editing')
       event.target.innerHTML="&nbsp;&nbsp;Save&nbsp;&nbsp;";
-      for(var i=0;i<DataItems.length-1;i++){
+      for(var i=1;i<DataItems.length-1;i++){
         DataItems.item(i).querySelector('input').disabled=false;
       }
     }
@@ -469,7 +469,7 @@ export class ManageemployeesComponent implements OnInit {
       var firstname=DataItems.item(1).querySelector('input').value
       var lastname=DataItems.item(2).querySelector('input').value
       var email=DataItems.item(3).querySelector('input').value
-      if(username==''||firstname==''||lastname==''||email==''){
+      if(firstname==''||lastname==''||email==''){
         message="Please fill required fields";
       }
       else if(email.indexOf('@')==-1){
@@ -480,7 +480,7 @@ export class ManageemployeesComponent implements OnInit {
         event.target.classList.remove('editing')
         event.target.classList.add('default-btn')
         event.target.innerHTML="&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;";
-        for(var i=0;i<DataItems.length-1;i++){
+        for(var i=1;i<DataItems.length-1;i++){
           DataItems.item(i).querySelector('input').disabled=true;    
         }
         var newUserDetail={
