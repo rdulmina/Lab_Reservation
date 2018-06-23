@@ -7,7 +7,7 @@
       </div>
       <div class="form-group" style="margin-left: 40px;">
         <label for="labfilter">Filter By Lab Name : </label>
-        <select class="form-control" name="labfilter">
+        <select class="form-control" name="labfilter" (change)="onChange($event.target.value)">
             <option value="select" selected>Select</option>
             <option *ngFor="let lab of allLabs" value={{lab.labName}}>{{lab.labName}}</option>
         </select>
@@ -65,12 +65,14 @@
     </thead>
     <tbody>
       <tr class="table-default" *ngFor="let lab of allLabs">
+        <ng-container *ngIf="lab.isVisible">
         <th scope="row">{{lab.labName}}</th>
         <td *ngFor="let k of objectKeys(date)">
           <table class="time-slot">
             <td *ngFor="let timeSolt of timeSlots" [ngClass]="{'reserved':isReserved(lab.labName,date[k],timeSolt)}"></td>
           </table>
         </td>
+       </ng-container>
       </tr>
     </tbody>
 </table>

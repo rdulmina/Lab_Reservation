@@ -22,16 +22,20 @@ export class ReservationsComponent implements OnInit {
   ngOnInit() {
     
     this.lab_service.getAllLabs().subscribe(res=>{
-    this.allLabs=res.labs;});
+    this.allLabs=res.labs;
+    var mythis=this;
+    this.allLabs.forEach(function(lab){
+      lab.isVisible=true;
+    });
+  });
     this.getReservations();
-    
+ 
   }
   
-  getReservations(){
+  getReservations(){ 
     this.reservation_service.getAllReservations().subscribe(res=>{ 
       this.reservations=res.reservations;
-      });  
-   
+      });
   }
   showReservations(event:any){
     this.week=event.target.value;
@@ -70,6 +74,17 @@ export class ReservationsComponent implements OnInit {
 
   objectKeys(obj) {
     return Object.keys(obj); 
+  }
+  onChange(labname){
+    this.allLabs.forEach(function(lab){
+      if(labname=="select" || lab.labName==labname){
+        lab.isVisible=true;
+      }
+      else{
+        lab.isVisible=false;
+      }
+      
+    });
   }
   
 }
