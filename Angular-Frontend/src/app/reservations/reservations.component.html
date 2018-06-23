@@ -5,6 +5,13 @@
           data-target="#week_range"><button class="default-btn btn">Pick A Week</button></span>
           <input type="text" class="form-control" readonly="" id="week_range" placeholder="Pick A Week To See Reservaions" (click)="showReservations($event)"/>
       </div>
+      <div class="form-group" style="margin-left: 40px;">
+        <label for="labfilter">Filter By Lab Name : </label>
+        <select class="form-control" name="labfilter">
+            <option value="select" selected>Select</option>
+            <option *ngFor="let lab of allLabs" value={{lab.labName}}>{{lab.labName}}</option>
+        </select>
+      </div>
 </form>
 <svg width="22" height="25">
     <rect x="4" y="12" width="12" height="12" style="fill:white;stroke:black;stroke-width:1;stroke-opacity:0.9" />

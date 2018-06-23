@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LabService } from '../service/lab.service';
+import { UserService } from '../service/user.service';
 import { NewreservationService } from '../service/newreservation.service';
+import { createCipheriv } from 'crypto';
 var jsPDF = require('jspdf');
 require('jspdf-autotable');
 @Component({
@@ -21,7 +23,11 @@ export class ReportsComponent implements OnInit {
   "July", "August", "September", "October", "November", "December"
   ];
   month="";
+  users=[]
+  user=false;
+
   constructor(
+    private userService:UserService,
     private lab_service:LabService,
     private reservation_service:NewreservationService
   ) { }
@@ -29,6 +35,10 @@ export class ReportsComponent implements OnInit {
   ngOnInit() {
     this.lab_service.getAllLabs().subscribe(res=>{
      this.allLabs=res.labs;
+    });
+
+    this.userService.getAllUsers().subscribe(res=>{
+      this.users=res.users;
     });
 
     this.reservation_service.getAllReservations().subscribe(res=>{ 
@@ -45,15 +55,30 @@ export class ReportsComponent implements OnInit {
 
   calculateFreq(month){
     this.reservationFreqJson=[];
+    this.reservationFreq=[];
     this.month=this.monthNames[month-1]
-    for(let lab of this.allLabs){
-      this.reservationFreq[lab.labName]=0;
-    } 
-    for(let reservation of this.allReservations){
-      var reservationMonth =reservation.date.substring(6,7)
-      if(reservationMonth==month){
-        this.reservationFreq[reservation.labName]++;
+    if(!this.user){
+      for(let lab of this.allLabs){
+        this.reservationFreq[lab.labName]=0;
+      } 
+      for(let reservation of this.allReservations){
+        var reservationMonth =reservation.date.substring(6,7)
+        if(reservationMonth==month){
+          this.reservationFreq[reservation.labName]++;
+        }
       }
+    }
+    else{
+      for(let user of this.users){
+        this.reservationFreq[user.username]=0;
+      } 
+      for(let reservation of this.allReservations){
+        var reservationMonth =reservation.date.substring(6,7)
+        if(reservationMonth==month){
+          this.reservationFreq[reservation.username]++;
+        }
+      }
+
     }
     //sorting the labs by decending order by its number of reservations for this month
     this.tuples = [];
@@ -71,7 +96,7 @@ export class ReportsComponent implements OnInit {
      
         //making json object array
         this.reservationFreqJson.push({
-          labName:this.tuples[i][0],
+          name:this.tuples[i][0],
           count:this.tuples[i][1]
         });
         
@@ -84,7 +109,19 @@ export class ReportsComponent implements OnInit {
   }
 
   monthlyLabReservations(){
-    var columns =["Lab Name", "Number Of Reservations"];
+    var caption=""
+    var title=""
+    if(this.user){
+      var columns =["User Name", "Number Of Reservations"];
+      caption="Reservations By User Report Of ";
+      title='Monthly_lab_reservations_by_users.pdf';
+    }
+    else{
+      var columns =["Lab Name", "Number Of Reservations"];
+      caption="Monthly Reservations Report Of ";
+      title='Monthly_lab_reservations.pdf';
+    }
+   
     var rows =this.tuples;
 
     var doc = new jsPDF();
@@ -95,17 +132,20 @@ export class ReportsComponent implements OnInit {
    
       margin: {top: 35},
       addPageContent: function(data) {
-        doc.text("Monthly Reservations Report Of "+b.year+" "+b.month, 50, 20);
+        doc.text(caption+b.year+" "+b.month, 50, 20);
         doc.text("Date : "+b.year+" "+b.thismonth+" "+b.date, 14, 28,{
           fontSize: 7
         })
       }});
-    doc.save('Monthly_lab_reservations.pdf'); 
+    doc.save(title); 
 
   }
   
+  setReport(val){
+    this.user=val;
+    var d = new Date();
+    var thisMonth = d.getMonth()+1;
+    this.calculateFreq(thisMonth);
+  }
  
-   
-  
-
 }

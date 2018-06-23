@@ -16,7 +16,6 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ManageemployeesComponent } from './manageemployees/manageemployees.component';
 import { ManagelabsComponent } from './managelabs/managelabs.component';
 import { ReportsComponent } from './reports/reports.component';
-
 const applicationrouts:Routes=[
   {path:'newreservation',component:NewreservationComponent},
   {path:'myreservations',component:MyreservationsComponent},
@@ -43,7 +42,8 @@ const applicationrouts:Routes=[
     FormsModule,
     HttpModule,     
     RouterModule.forRoot(applicationrouts),
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+
   ],
   providers: [
     AuthService,

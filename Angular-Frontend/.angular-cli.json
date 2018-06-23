@@ -29,7 +29,7 @@
     "../src/assets/js/bootstrap-datepicker.min.js",
     "../src/assets/js/week-picker.js",
     "../src/assets/js/datepicker-init.js",
-    "..node_modules/bootstrap-notify/bootstrap-notify.min.js"
+    "../node_modules/bootstrap-notify/bootstrap-notify.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
