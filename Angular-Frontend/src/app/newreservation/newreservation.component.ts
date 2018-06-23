@@ -8,12 +8,14 @@ import * as $ from "jquery"
   styleUrls: ['./newreservation.component.css']
 })
 export class NewreservationComponent implements OnInit {
-  labName=String;
+  labName="";
   date="";
   timeSlots=[];
   allLabs=[];
-  time=String;
-
+  time="";
+  flag1=false;
+  validDate=false;
+  selectedTime:any;
   constructor(
     private newreservation_service:NewreservationService,
     private lab_service:LabService
@@ -368,8 +370,6 @@ export class NewreservationComponent implements OnInit {
         };
       
       }));
-         
-      
   }
 
   //check if the selected date is passed
@@ -378,42 +378,45 @@ export class NewreservationComponent implements OnInit {
      var currentdate= new Date().toJSON().toString().substring(0,10).replace(/-/g, "");
      return pickedDate>=currentdate;
   }
- 
+
   findtimeslots(event:any){
-  
-    this.date=event.target.value;
-    
-    if(this.dateValidation(event)){
-      console.log("date valid");
-      var lab_date={
-        labName:this.labName,
-        date:this.date
-      }
-      console.log(JSON.stringify(lab_date));
-      this.newreservation_service.findTimeSlots(lab_date).subscribe(res=>{
-      this.timeSlots=res.timeSlots;
-      console.log(this.timeSlots)
-      })
+    if(!this.flag1){
+      this.flag1=true;
     }
     else{
-      $.notify({
-        // options
-        icon: 'glyphicon glyphicon-remove-circle',
-        message: ' Invalid Date' 
-      },{
-        // settings
-        type: 'danger',
-        delay: 3000,
-        timer: 800
-      });
-     
+    this.date=event.target.value;
+    if(this.dateValidation(event)){
+      this.validDate=true;
+      if(this.labName=="" || this.labName=="select"){
+        this.showNotification("Please Select Lab Name","glyphicon-remove-circle","warning")
+      }
+      else{ 
+            var lab_date={
+              labName:this.labName,
+              date:this.date
+            }
+            console.log(JSON.stringify(lab_date));
+            this.newreservation_service.findTimeSlots(lab_date).subscribe(res=>{
+            this.timeSlots=res.timeSlots;
+            console.log(this.timeSlots)
+            });
+      }
     }
-    //  console.log();
-     
+    else{
+      this.timeSlots=[];
+      this.validDate=false;
+      this.showNotification("Invalid Date","glyphicon-remove-circle","danger")
+        }
+      this.flag1=false; 
+    } 
   }
+
   labChanged(){
-    console.log(this.date)
-    if(this.date){
+    if(this.labName=="select"){
+      this.timeSlots=[];
+      this.showNotification("Please Select Lab Name","glyphicon-remove-circle","warning")
+    }
+    else if(this.validDate){
       var lab_date={
         labName:this.labName,
         date:this.date
@@ -424,7 +427,9 @@ export class NewreservationComponent implements OnInit {
       });
     }
   }
+
   addReservation(){
+    if(this.time!="" && this.time!="Select"){
     var username=JSON.parse(localStorage.getItem('UserData')).username;
     var newReservation={
       labName:this.labName,
@@ -432,19 +437,30 @@ export class NewreservationComponent implements OnInit {
       time:this.time,
       username:username
     }
-    //console.log(newReservation)
+    
     this.newreservation_service.addReservation(newReservation).subscribe(res=>{
-      $.notify({
-        // options
-        icon: 'glyphicon glyphicon-ok-circle',
-        message: res.msg 
-      },{
-        // settings
-        type: 'success',
-        delay: 3000,
-        timer: 800
+      this.showNotification(res.msg,"glyphicon-ok-circle","success")
       });
-     
-      });
+      this.selectedTime[this.selectedTime.selectedIndex].remove();
+    }
+    else{
+      this.showNotification("Please Select Time Slot","glyphicon-remove-circle","warning")
+    }
+  }
+  //this function handles all the notifications
+  showNotification(msg,icon,type){
+    $.notify({
+      // options
+      icon: 'glyphicon '+icon,
+      message: msg 
+    },{
+      // settings
+      type: type,
+      delay: 3000,
+      timer: 800
+    });
+  }
+  onChangeTime(object:any){
+    this.selectedTime=object;
   }
 }

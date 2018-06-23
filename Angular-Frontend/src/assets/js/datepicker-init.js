@@ -5,7 +5,6 @@ $(document).ready(function() {
         })
         .on('changeDate', function(e) {
          
-            
         });
         $('#datePicker2')
         .datepicker({
