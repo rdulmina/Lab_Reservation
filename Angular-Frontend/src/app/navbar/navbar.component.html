@@ -30,7 +30,7 @@
                   <li *ngIf="admin" [routerLink]="['/manageemployees']"><a [routerLink]="['']">Manage Employees</a></li>
                   <!-- <li *ngIf="admin" [routerLink]="['/managelabs']"><a [routerLink]="['']">Manage Labs</a></li> -->
                   <li *ngIf="admin" [routerLink]="['/reports']"><a [routerLink]="['/myreservations']">Reports</a></li>
-                  <li><a href="#">Settings</a></li>
+                  <li><a [routerLink]="['/settings']">Settings</a></li>
                   <li class="divider"></li>
                   <li><a href="#" (click)="logout()">Logout</a></li>
                 </ul>

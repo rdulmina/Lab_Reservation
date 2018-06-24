@@ -79,4 +79,11 @@ router.post('/update',function(req,res){
     })
     
 }); 
+router.post('/changepass',function(req,res){
+    User.changePassword(req.body,function(err,msg){
+         if (err) throw err;
+         res.json({msg:msg})
+    })
+    
+}); 
 module.exports=router;

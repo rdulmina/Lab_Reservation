@@ -16,13 +16,14 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { ManageemployeesComponent } from './manageemployees/manageemployees.component';
 import { ManagelabsComponent } from './managelabs/managelabs.component';
 import { ReportsComponent } from './reports/reports.component';
+import { SettingsComponent } from './settings/settings.component';
 const applicationrouts:Routes=[
   {path:'newreservation',component:NewreservationComponent},
   {path:'myreservations',component:MyreservationsComponent},
-  {path:'settings',component:NewreservationComponent},
   {path:'manageemployees',component:ManageemployeesComponent},
   {path:'managelabs',component:ManagelabsComponent},
   {path:'reports',component:ReportsComponent},
+  {path:'settings',component:SettingsComponent},
   {path:'',component:ReservationsComponent}
 ]
 
@@ -35,7 +36,8 @@ const applicationrouts:Routes=[
     MyreservationsComponent,
     ManageemployeesComponent,
     ManagelabsComponent,
-    ReportsComponent
+    ReportsComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

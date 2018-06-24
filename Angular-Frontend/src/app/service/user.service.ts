@@ -33,4 +33,9 @@ export class UserService {
     headers.append('Content-type','application/json');
     return this.http.post('http://localhost:3000/user/update',newUserDetail,{headers:headers}).map(res=>res.json());
   }
+  updatePassword(newpass){
+    let headers=new Headers();
+    headers.append('Content-type','application/json');
+    return this.http.post('http://localhost:3000/user/changepass',newpass,{headers:headers}).map(res=>res.json());
+  }
 }

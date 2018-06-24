@@ -12,7 +12,7 @@ var userSchema = new Schema({
   type:String
 });
 
-module.exports=mongoose.model('user',userSchema);
+const User=module.exports=mongoose.model('user',userSchema);
 
 module.exports.addUser=function(newuser,callback){
   this.findByUsername(newuser.username,function(err,user){
@@ -44,4 +44,30 @@ module.exports.deleteUser=function(_id,callback){
 module.exports.updateUser=function(newUserDetail,callback){
   const query={username:newUserDetail.username}
   this.update(query,newUserDetail,callback);
+}
+module.exports.changePassword=function(newPassDetail,callback){
+  this.findByUsername(newPassDetail.username,function(err,user){
+    if(err) throw err;
+    if(!user){
+        callback(err,"Invalid User")
+    }
+    else{
+    var hash=user.password;
+    if(bcrypt.compareSync(newPassDetail.oldpassword, hash)){
+      var salt = bcrypt.genSaltSync(10);
+      var hash = bcrypt.hashSync(newPassDetail.newPassword, salt);
+      newuser={
+        password:hash
+      };
+      const query={username:newPassDetail.username}
+      User.update(query,newuser);
+      callback(err,"Password changed");
+    }
+    else{
+      callback(err,"Old password dosen't match");
+    }
+}
+    
+});
+  
 }
