@@ -8,14 +8,17 @@ import * as $ from "jquery"
   styleUrls: ['./newreservation.component.css']
 })
 export class NewreservationComponent implements OnInit {
-  labName="";
-  date="";
+  labName="";labName2=""
+  date=""; date2="";
   timeSlots=[];
   allLabs=[];
-  time="";
-  flag1=false;
-  validDate=false;
-  selectedTime:any;
+  time=""; time2="";
+  flag1=false; flag2=false;
+  validDate=false; validDate2=false;
+  selectedTime:any; selectedTime2:any;
+  availableLabs=[];
+  allReservations=[];
+ 
   constructor(
     private newreservation_service:NewreservationService,
     private lab_service:LabService
@@ -26,6 +29,10 @@ export class NewreservationComponent implements OnInit {
     this.lab_service.getAllLabs().subscribe(res=>{
       this.allLabs=res.labs;
       });
+      //get all reservations
+      this.newreservation_service.getAllReservations().subscribe(res=>{ 
+       this.allReservations=res.reservations;
+        });
        //  Project: Bootstrap Notify = v3.1.3
        (function (factory) {
         if (typeof define === 'function' && define.amd) {
@@ -437,11 +444,12 @@ export class NewreservationComponent implements OnInit {
       time:this.time,
       username:username
     }
-    
+    this.allReservations.push(newReservation);
     this.newreservation_service.addReservation(newReservation).subscribe(res=>{
       this.showNotification(res.msg,"glyphicon-ok-circle","success")
       });
       this.selectedTime[this.selectedTime.selectedIndex].remove();
+      this.selectedTime.selectedIndex=0;
     }
     else{
       this.showNotification("Please Select Time Slot","glyphicon-remove-circle","warning")
@@ -462,5 +470,92 @@ export class NewreservationComponent implements OnInit {
   }
   onChangeTime(object:any){
     this.selectedTime=object;
+  }
+  onChangeTime2(timeSlot){
+
+    this.labName2="Select"
+    if(this.selectedTime2)this.selectedTime2.selectedIndex=0;
+    this.time2=timeSlot;
+    if(timeSlot=="Select"){
+      this.showNotification("Please Select Time Slot","glyphicon-remove-circle","warning")
+    }
+    else if(!this.validDate2){
+      //this.showNotification("Invalid Date","glyphicon-remove-circle","danger")
+    }
+    else{
+      this.setAvailableLabs()
+    }
+  }
+
+  setAvailableLabs(){
+    var mythis=this;
+    this.availableLabs=[];
+    this.allLabs.forEach(function(lab){
+      mythis.availableLabs.push(lab.labName)
+    });
+
+    this.allReservations.forEach(function(reservation){
+        var rdate=reservation.date.substring(0,10);
+        if(rdate==mythis.date2 && reservation.time==mythis.time2){
+              var elementIndex=mythis.availableLabs.indexOf(reservation.labName);
+              if(elementIndex!=-1){
+                mythis.availableLabs.splice(elementIndex,1);
+              }
+        }
+         
+    });
+      
+  }
+
+  onChangeDate2(event: any){
+    if(!this.flag2){
+      this.flag2=true;
+    }
+    else{
+      this.labName2="Select"
+      if(this.selectedTime2)this.selectedTime2.selectedIndex=0;
+      this.date2=event.target.value;
+      if(this.dateValidation(event)){
+        this.validDate2=true;
+        if(this.time2=="select"){
+          this.showNotification("Please Pick A Time","glyphicon-remove-circle","warning")
+        }
+        else{ 
+          this.setAvailableLabs()
+        }
+      }
+      else{
+        this.availableLabs=[];
+        this.validDate2=false;
+        this.showNotification("Invalid Date","glyphicon-remove-circle","danger")
+          }
+        this.flag2=false; 
+      } 
+  }
+  setLabname(object){
+    this.labName2=object.value;
+    this.selectedTime2=object;
+    
+  }
+  addReservation2(){
+    if( this.labName2!="Select"){
+    var username=JSON.parse(localStorage.getItem('UserData')).username;
+    var newReservation={
+      labName:this.labName2,
+      date:this.date2,
+      time:this.time2,
+      username:username
+    }
+    this.labName2="Select";
+    this.allReservations.push(newReservation);
+    this.newreservation_service.addReservation(newReservation).subscribe(res=>{
+      this.showNotification(res.msg,"glyphicon-ok-circle","success")
+      });
+      this.selectedTime2[this.selectedTime2.selectedIndex].remove();
+      this.selectedTime2.selectedIndex=0;
+    }
+    else{
+      this.showNotification("Please Select Lab Name","glyphicon-remove-circle","warning")
+    }
   }
 }
