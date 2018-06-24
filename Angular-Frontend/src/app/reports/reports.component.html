@@ -41,9 +41,9 @@
              </tr>
            </thead>
            <tbody>
-             <tr *ngFor="let lab of reservationFreqJson">
-               <td>{{lab.name}}</td>
-               <td>{{lab.count}}</td>
+             <tr *ngFor="let lab of reservationFreq">
+               <td>{{lab[0]}}</td>
+               <td>{{lab[1]}}</td>
              </tr>
            </tbody>
          </table>
@@ -81,13 +81,19 @@
                <thead>
                  <tr>
                    <th>User Name</th>
+                   <th>First Name</th>
+                   <th>Last Name</th>
+                   <th>Email</th>
                    <th>Number Of Reservations</th>
                  </tr>
                </thead>
                <tbody>
-                 <tr *ngFor="let lab of reservationFreqJson">
-                   <td>{{lab.name}}</td>
-                   <td>{{lab.count}}</td>
+                 <tr *ngFor="let lab of reservationFreq">
+                   <td>{{lab[0]}}</td>
+                   <td>{{lab[1]}}</td>
+                   <td>{{lab[2]}}</td>
+                   <td>{{lab[3]}}</td>
+                   <td>{{lab[4]}}</td>
                  </tr>
                </tbody>
              </table>

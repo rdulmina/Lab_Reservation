@@ -17,6 +17,7 @@ import { ManageemployeesComponent } from './manageemployees/manageemployees.comp
 import { ManagelabsComponent } from './managelabs/managelabs.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SettingsComponent } from './settings/settings.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 const applicationrouts:Routes=[
   {path:'newreservation',component:NewreservationComponent},
   {path:'myreservations',component:MyreservationsComponent},
@@ -38,6 +39,7 @@ const applicationrouts:Routes=[
     ManagelabsComponent,
     ReportsComponent,
     SettingsComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ const applicationrouts:Routes=[
     HttpModule,     
     RouterModule.forRoot(applicationrouts),
     AngularFontAwesomeModule,
+    NgbModule.forRoot()
 
   ],
   providers: [

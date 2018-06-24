@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { LabService } from '../service/lab.service';
 import { UserService } from '../service/user.service';
 import { NewreservationService } from '../service/newreservation.service';
-import { createCipheriv } from 'crypto';
 var jsPDF = require('jspdf');
 require('jspdf-autotable');
 @Component({
@@ -12,7 +11,7 @@ require('jspdf-autotable');
 })
 export class ReportsComponent implements OnInit {
   reservationFreq=[];
-  reservationFreqJson=[];
+  //reservationFreqJson=[];
   allReservations=[];
   allLabs=[];
   tuples=[];
@@ -54,7 +53,7 @@ export class ReportsComponent implements OnInit {
   }
 
   calculateFreq(month){
-    this.reservationFreqJson=[];
+    //this.reservationFreqJson=[];
     this.reservationFreq=[];
     this.month=this.monthNames[month-1]
     if(!this.user){
@@ -83,24 +82,35 @@ export class ReportsComponent implements OnInit {
     //sorting the labs by decending order by its number of reservations for this month
     this.tuples = [];
     //convert reservationFreq objec to an array
-    for (var key in this.reservationFreq) this.tuples.push([key, this.reservationFreq[key]]);
+    for (var key in this.reservationFreq){
+      if(this.user){
+        for(var i=0;i<this.users.length;i++){
+          if(this.users[i].username==key){
+                this.tuples.push([key,this.users[i].firstname,this.users[i].lastname,this.users[i].email, this.reservationFreq[key]]);
+                break;
+              }
+        }
+      }
+      else
+      this.tuples.push([key, this.reservationFreq[key]]);
+    }
     //sort array
     this.tuples.sort(function(a, b) { //pass a compair function
-        a = a[1];
-        b = b[1];
+        a = a[4];
+        b = b[4];
     
         return a > b ? -1 : (a < b ? 1 : 0);
     });
-    
-    for (var i = 0; i < this.tuples.length; i++) {
-     
-        //making json object array
-        this.reservationFreqJson.push({
-          name:this.tuples[i][0],
-          count:this.tuples[i][1]
-        });
+    this.reservationFreq=this.tuples;
+    // for (var i = 0; i < this.tuples.length; i++) {
+      
+    //     //making json object array
+    //     this.reservationFreqJson.push({
+    //       name:this.tuples[i][0],
+    //       count:this.tuples[i][1]
+    //     });
         
-    }
+    // }
   
   }
 
@@ -112,7 +122,7 @@ export class ReportsComponent implements OnInit {
     var caption=""
     var title=""
     if(this.user){
-      var columns =["User Name", "Number Of Reservations"];
+      var columns =["User Name","First Name","Last Name","Email","Number Of Reservations"];
       caption="Reservations By User Report Of ";
       title='Monthly_lab_reservations_by_users.pdf';
     }
@@ -128,8 +138,7 @@ export class ReportsComponent implements OnInit {
     var b=this;
     // doc.text("Monthly Reservations Report")
     doc.autoTable(columns, rows,{
-    
-   
+       
       margin: {top: 35},
       addPageContent: function(data) {
         doc.text(caption+b.year+" "+b.month, 50, 20);

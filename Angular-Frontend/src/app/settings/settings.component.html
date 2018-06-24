@@ -6,15 +6,15 @@
           <h3>Change password</h3>
           <div class="form-group">
             <label for="oldpw">Old Password:</label>
-            <input name="oldpw" class="form-control" [(ngModel)]="oldpw" type="password">
+            <input name="oldpw" class="form-control" [(ngModel)]="oldpw" type="password" placeholder="Type old password">
           </div>
           <div class="form-group">
             <label for="newpw">New Password:</label>
-            <input name="newpw" class="form-control" [(ngModel)]="newpw" type="password">
+            <input name="newpw" class="form-control" [(ngModel)]="newpw" type="password" placeholder="Type new password">
           </div>
           <div class="form-group">
             <label for="cnewpw">Confirm New Password:</label>
-            <input name="cnewpw" class="form-control" [(ngModel)]="cnewpw" type="password">
+            <input name="cnewpw" class="form-control" [(ngModel)]="cnewpw" type="password" placeholder="Retype new password">
           </div>
           <button class="btn default-btn" (click)="changePassword()">Change Password</button>
         </form> 
