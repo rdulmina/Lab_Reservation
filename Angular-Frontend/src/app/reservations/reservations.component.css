@@ -1,0 +1,29 @@
+
+#reservationtable thead{
+    background-color:#adbcbc;
+    color:rgb(30, 65, 66);
+}
+#reservationtable thead tr th{
+    width:200px;
+}
+#reservationtable thead tr th table td{
+    width: 50px;
+  
+}
+.time-slot td{
+    width: 50px;
+    border-top: none;
+    border-bottom: none;
+    height: 30px;
+}
+.reserved{
+    background-color: rgb(219, 142, 0);   
+}
+#week_range{
+    width: 240px;
+    border-radius: 20px;
+}
+table, th, td {
+    border-top: 1px solid rgb(134, 134, 134);
+    border-right: 1px solid rgb(134, 134, 134);
+}

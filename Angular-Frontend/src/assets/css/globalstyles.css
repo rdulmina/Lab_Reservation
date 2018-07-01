@@ -1,0 +1,39 @@
+h2{
+    color:rgb(30, 65, 66); 
+  
+}
+.default-btn{
+    background-color:#adbcbc;
+    border-radius: 25px;
+   
+}
+.default-btn:hover{
+    background-color:rgb(30, 65, 66);
+    color: white;
+    box-shadow:0 6px 4px -2px gray;
+}
+table{
+    border-radius: 10px;
+}
+.button-danger{
+    color: rgb(61, 61, 61);
+    border-radius: 25px;
+    background-color:rgb(216, 138, 142);
+}
+.button-danger:hover{
+    color: white;
+    background-color:rgb(143, 38, 43);
+    box-shadow:0 6px 4px -2px gray;
+}
+.editing{
+    background-color: #e7b100;
+    color: white;
+    border-radius: 25px;
+    
+}
+.editing:hover{
+    background-color: #cc8b00;
+    color: white;
+    border-radius: 25px;
+    box-shadow:0 6px 4px -2px gray;
+}
